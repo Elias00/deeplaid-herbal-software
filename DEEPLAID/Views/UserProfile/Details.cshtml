@@ -1,0 +1,58 @@
+﻿@using DEEPLAID.Models
+@using DEEPLAID.Models.Master
+@model DEEPLAID.Models.Master.UserProfile
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd style="color: blue">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+    </dl>*@
+</div>
+<h3>User Profile: <span style="color: blue"> @Model.Name </span></h3>
+<hr />
+<p>
+    @Html.ActionLink("Add a Menu", "AddSiteMenu", new { id = Model.Id })|
+    @Html.ActionLink("Back", "Index")
+</p>
+
+<table class="table">
+    <tr>
+        <th style="color: blue">Action Feature</th>
+    </tr>
+    @{
+        DeeplaidDbContext db = new DeeplaidDbContext();
+        var siteMenus = db.UserProfileSiteMenus.ToList();
+        var siteMenusFiltere = from m in siteMenus where m.UserProfileId == Model.Id select m;
+
+        foreach (var menu in siteMenusFiltere)
+        {
+            var amenu = db.SiteMenus.Find(menu.SiteMenuId);
+            <tr>
+                <td>@amenu.Name</td>
+                
+            </tr>
+        }
+    }
+    <tr>
+    </tr>
+</table>

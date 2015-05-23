@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DEEPLAID.Models.Master.User>
+
+@{
+    ViewBag.Title = "ProfileUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile Name: <span style="color: blue">@ViewBag.ProfileName</span> </h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            User Name
+        </th>
+        <th>
+            Login Id
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginId)
+        </td>
+    </tr>
+}
+
+</table>
